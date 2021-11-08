@@ -4,27 +4,13 @@ services:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
-  mongo:
-    image: mongo
-    ports: 
-      - "27017:27017"
-    environment: 
-      MONGO_INITDB_ROOT_USERNAME: apan5400
-      MONGO_INITDB_ROOT_PASSWORD: apan5400
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
-    ports: 
-      - "9200:9200"
-    environment:
-      discovery.type: single-node
   kafka:
     build: .
     ports:
-      - "9092:9092"
+      - "9092"
     environment:
       DOCKER_API_VERSION: 1.22
-      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
-      KAFKA_CREATE_TOPICS: "apan5400:1:1"
+      KAFKA_ADVERTISED_HOST_NAME: "127.0.0.1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
