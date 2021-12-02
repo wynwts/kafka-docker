@@ -1,7 +1,7 @@
 version: '2'
 services:
   zookeeper:
-    image: wurstmeister/zookeeper
+    image: zookeeper
     ports:
       - "2181:2181"
   kafka:
@@ -14,17 +14,11 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-  mongo:
-    image: mongo
-    ports: 
-      - "27017:27017"
-    environment: 
-      MONGO_INITDB_ROOT_USERNAME: apan5400
-      MONGO_INITDB_ROOT_PASSWORD: apan5400
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
     ports: 
       - "9200:9200"
+      - "9300:9300"
     environment:
       discovery.type: single-node
   
